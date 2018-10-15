@@ -1,11 +1,9 @@
 identidock:
   build: .
   expose:
-      - "9090"
+    - "9090"
   environment:
     ENV: PROD
-    #no_proxy: localhost,dnmonster
-    #NO_PROXY: localhost,dnmonster
   links:
     - dnmonster
     - redis
