@@ -14,7 +14,7 @@ RUN echo \
     && rm -rf /var/lib/apt/lists/*
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
 
-RUN curl -L https://github.com/docker/compose/releases/download/1.4.1/docker-compose/`uname -s`-`uname -m` > /usr/local/bin/docker-compose; \
+RUN curl -L https://github.com/docker/compose/releases/download/1.4.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; \
     chmod +x /usr/local/bin/docker-compose
 
 USER jenkins
