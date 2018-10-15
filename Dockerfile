@@ -18,6 +18,7 @@ RUN curl -L https://github.com/docker/compose/releases/download/1.4.1/docker-com
     chmod +x /usr/local/bin/docker-compose
 
 USER jenkins
+COPY jenkins.yml /jenkins.yml
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
 
