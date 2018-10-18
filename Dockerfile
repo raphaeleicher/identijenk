@@ -13,12 +13,14 @@ RUN echo \
     && apt-get install -y docker-engine \
     && rm -rf /var/lib/apt/lists/*
 RUN echo "jenkins ALL=NOPASSWD: ALL" >> /etc/sudoers
+#RUN mkdir -p /home/jenkins && chown -R jenkins /home/jenkins
 
-RUN curl -L https://github.com/docker/compose/releases/download/1.4.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; \
+#RUN curl -L https://github.com/docker/compose/releases/download/1.4.1/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; \
+#    chmod +x /usr/local/bin/docker-compose
+RUN curl -L https://github.com/docker/compose/releases/download/1.22.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose; \
     chmod +x /usr/local/bin/docker-compose
 
 USER jenkins
-COPY jenkins.yml /jenkins.yml
 COPY plugins.txt /usr/share/jenkins/plugins.txt
 RUN /usr/local/bin/plugins.sh /usr/share/jenkins/plugins.txt
 
