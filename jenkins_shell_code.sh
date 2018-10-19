@@ -20,7 +20,16 @@ if [ $ERR -eq 0 ]; then
         jenkins_identidock_1)
     CODE=$( curl -sL -w "%{http_code}" $IP:9090/monster/bla \
         -o /dev/null) || true
-    if [ $CODE -ne 200 ]; then
+    if [ $CODE -eq 200 ]; then
+        echo "Test passed - Tagging"
+        HASH=$(git rev-parse --short HEAD)
+        sudo docker tag jenkins_identidock raphaeleicher/identidock:$HASH
+        sudo docker tag jenkins_identidock raphaeleicher/identidock:newest
+        echo "Pushing"
+        sudo docker login -e raphael.eicher@gmail.com -u raphaeleicher -p Massimo*99
+        sudo docker push raphaeleicher/identidock:$HASH
+        sudo docker push raphaeleicher/identidock:newest
+    else
         echo "Site returned " $CODE
         ERR=1
     fi
